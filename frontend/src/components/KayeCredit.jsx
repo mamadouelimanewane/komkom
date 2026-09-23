@@ -83,41 +83,41 @@ export default function KayeCredit({
   return (
     <div className="space-y-6">
       {/* Top Controls */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-white p-3 sm:p-4 rounded-2xl border border-slate-200/80 shadow-sm">
         <div className="relative flex-1">
-          <Search className="w-5 h-5 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+          <Search className="w-4 h-4 sm:w-5 sm:h-5 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
           <input 
             type="text"
-            placeholder="Rechercher un commerçant, client ou marchandise..."
+            placeholder="Rechercher un commerçant ou marchandise..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-11 pr-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
+            className="w-full pl-10 sm:pl-11 pr-4 py-2 sm:py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
           />
         </div>
 
-        <div className="flex items-center gap-2">
-          <div className="flex bg-slate-100 p-1 rounded-xl text-xs font-semibold text-slate-600">
+        <div className="flex items-center justify-between sm:justify-start gap-2 overflow-x-auto no-scrollbar py-0.5">
+          <div className="flex bg-slate-100 p-1 rounded-xl text-[11px] sm:text-xs font-semibold text-slate-600 shrink-0">
             <button 
               onClick={() => setFilterStatus('all')}
-              className={`px-3 py-1.5 rounded-lg transition ${filterStatus === 'all' ? 'bg-white text-slate-900 shadow-sm' : 'hover:text-slate-900'}`}
+              className={`px-2.5 sm:px-3 py-1.5 rounded-lg transition ${filterStatus === 'all' ? 'bg-white text-slate-900 shadow-sm' : 'hover:text-slate-900'}`}
             >
               Tous ({credits.length})
             </button>
             <button 
               onClick={() => setFilterStatus('overdue')}
-              className={`px-3 py-1.5 rounded-lg transition ${filterStatus === 'overdue' ? 'bg-rose-600 text-white shadow-sm' : 'hover:text-rose-600'}`}
+              className={`px-2.5 sm:px-3 py-1.5 rounded-lg transition ${filterStatus === 'overdue' ? 'bg-rose-600 text-white shadow-sm' : 'hover:text-rose-600'}`}
             >
-              En retard
+              Retards
             </button>
             <button 
               onClick={() => setFilterStatus('active')}
-              className={`px-3 py-1.5 rounded-lg transition ${filterStatus === 'active' ? 'bg-emerald-600 text-white shadow-sm' : 'hover:text-emerald-600'}`}
+              className={`px-2.5 sm:px-3 py-1.5 rounded-lg transition ${filterStatus === 'active' ? 'bg-emerald-600 text-white shadow-sm' : 'hover:text-emerald-600'}`}
             >
               En cours
             </button>
             <button 
               onClick={() => setFilterStatus('paid')}
-              className={`px-3 py-1.5 rounded-lg transition ${filterStatus === 'paid' ? 'bg-slate-800 text-white shadow-sm' : 'hover:text-slate-900'}`}
+              className={`px-2.5 sm:px-3 py-1.5 rounded-lg transition ${filterStatus === 'paid' ? 'bg-slate-800 text-white shadow-sm' : 'hover:text-slate-900'}`}
             >
               Soldés
             </button>
@@ -125,10 +125,11 @@ export default function KayeCredit({
 
           <button 
             onClick={() => setShowAddModal(true)}
-            className="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2.5 rounded-xl font-bold text-xs shadow-md shadow-emerald-900/20 transition active:scale-95"
+            className="flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl font-bold text-xs shadow-md shadow-emerald-900/20 transition active:scale-95 shrink-0"
           >
-            <Plus className="w-4 h-4" />
-            Nouveau Crédit
+            <Plus className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            <span className="hidden xs:inline">Nouveau</span>
+            <span className="xs:hidden">+</span>
           </button>
         </div>
       </div>

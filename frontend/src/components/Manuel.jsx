@@ -7,15 +7,15 @@ export default function Manuel() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6 pb-12">
+    <div className="max-w-4xl mx-auto space-y-4 sm:space-y-6 pb-12">
       {/* Header Toolbar */}
-      <div className="bg-gradient-to-r from-emerald-800 to-teal-900 text-white rounded-3xl p-6 sm:p-8 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="bg-gradient-to-r from-emerald-800 to-teal-900 text-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold mb-2 border border-emerald-400/30">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[11px] font-bold mb-2 border border-emerald-400/30">
             <BookOpen className="w-3.5 h-3.5" />
             Documentation Officielle • Koom-Koom Voice
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold font-display">
+          <h1 className="text-xl sm:text-3xl font-extrabold font-display leading-tight">
             Manuel d'Utilisation & Guide Pratique
           </h1>
           <p className="text-xs sm:text-sm text-emerald-200/80 mt-1">
@@ -25,19 +25,19 @@ export default function Manuel() {
 
         <button 
           onClick={handlePrint}
-          className="flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-5 py-3 rounded-2xl font-black text-xs shadow-lg transition transform hover:scale-105 active:scale-95 shrink-0"
+          className="w-full sm:w-auto flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-5 py-3 rounded-2xl font-black text-xs shadow-lg transition transform active:scale-95 shrink-0"
         >
           <Printer className="w-4 h-4" />
-          Imprimer ou Exporter en PDF
+          <span>Imprimer / Exporter en PDF</span>
         </button>
       </div>
 
       {/* Manual Content Paper */}
-      <div className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/80 shadow-sm space-y-8 text-slate-800 text-sm leading-relaxed">
+      <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-10 border border-slate-200/80 shadow-sm space-y-6 sm:space-y-8 text-slate-800 text-xs sm:text-sm leading-relaxed">
         
         {/* Intro */}
         <div>
-          <h2 className="text-xl font-bold font-display text-slate-900 border-b border-emerald-500 pb-2 mb-3 flex items-center gap-2">
+          <h2 className="text-lg sm:text-xl font-bold font-display text-slate-900 border-b border-emerald-500 pb-2 mb-3 flex items-center gap-2">
             <span>1.</span> Pourquoi Koom-Koom Voice ?
           </h2>
           <p className="text-slate-600">

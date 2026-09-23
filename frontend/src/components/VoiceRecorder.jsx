@@ -338,10 +338,10 @@ export default function VoiceRecorder({ onParsedActionSuccess }) {
             <button 
               onClick={handleExecute}
               disabled={isAnalyzing}
-              className="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-2xl font-extrabold text-sm shadow-lg shadow-emerald-900/30 transition transform hover:scale-105 active:scale-95"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-5 sm:px-6 py-3 rounded-2xl font-extrabold text-xs sm:text-sm shadow-lg shadow-emerald-900/30 transition transform active:scale-95"
             >
               <Check className="w-4 h-4" />
-              Valider & Inscrire dans le Kaye Numérique
+              <span>Valider & Inscrire dans le Kaye</span>
             </button>
           </div>
         </div>

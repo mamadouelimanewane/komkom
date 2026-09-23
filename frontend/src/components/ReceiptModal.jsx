@@ -22,10 +22,10 @@ export default function ReceiptModal({ receipt, onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-      <div className="bg-white rounded-3xl max-w-md w-full overflow-hidden shadow-2xl border border-slate-200 animate-in fade-in zoom-in duration-200">
+    <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4">
+      <div className="bg-white rounded-3xl max-w-md w-full max-h-[92vh] overflow-y-auto shadow-2xl border border-slate-200 animate-in fade-in zoom-in duration-200">
         {/* Receipt Header */}
-        <div className="bg-slate-900 text-white p-5 flex items-center justify-between">
+        <div className="bg-slate-900 text-white p-4 sm:p-5 flex items-center justify-between sticky top-0 z-10">
           <div className="flex items-center gap-2">
             <span className="text-xl">🧾</span>
             <div>
@@ -39,7 +39,7 @@ export default function ReceiptModal({ receipt, onClose }) {
         </div>
 
         {/* Printable Receipt Paper */}
-        <div className="p-6 bg-slate-50 space-y-4 font-mono text-xs text-slate-700">
+        <div className="p-4 sm:p-6 bg-slate-50 space-y-4 font-mono text-xs text-slate-700">
           <div className="text-center border-b border-dashed border-slate-300 pb-3">
             <div className="font-black text-sm text-slate-900 font-display uppercase tracking-wider">{receipt.businessName}</div>
             <div className="text-[11px] text-slate-500 mt-0.5">{receipt.market}</div>

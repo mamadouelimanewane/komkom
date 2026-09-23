@@ -36,24 +36,24 @@ export default function WaveCheckout({ credit, merchant, onPaymentSuccess, onClo
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-      <div className="bg-white rounded-3xl max-w-sm w-full overflow-hidden shadow-2xl border border-sky-100 animate-in fade-in zoom-in duration-200">
+    <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4">
+      <div className="bg-white rounded-3xl max-w-sm w-full max-h-[92vh] overflow-y-auto shadow-2xl border border-sky-100 animate-in fade-in zoom-in duration-200">
         {/* Wave Blue Header */}
-        <div className="bg-[#1ea5fc] text-white p-6 text-center relative">
-          <div className="w-14 h-14 mx-auto rounded-2xl bg-white text-[#1ea5fc] flex items-center justify-center text-2xl font-black shadow-lg mb-3">
+        <div className="bg-[#1ea5fc] text-white p-5 sm:p-6 text-center relative">
+          <div className="w-12 h-12 sm:w-14 sm:h-14 mx-auto rounded-2xl bg-white text-[#1ea5fc] flex items-center justify-center text-xl sm:text-2xl font-black shadow-lg mb-2 sm:mb-3">
             🌊
           </div>
-          <span className="text-xs font-bold tracking-widest uppercase opacity-90">Wave Sénégal</span>
-          <h2 className="text-2xl font-black font-display mt-1">
-            {amount.toLocaleString('fr-FR')} <span className="text-sm font-bold">FCFA</span>
+          <span className="text-[10px] sm:text-xs font-bold tracking-widest uppercase opacity-90">Wave Sénégal</span>
+          <h2 className="text-xl sm:text-2xl font-black font-display mt-0.5 sm:mt-1">
+            {amount.toLocaleString('fr-FR')} <span className="text-xs sm:text-sm font-bold">FCFA</span>
           </h2>
-          <p className="text-xs text-sky-100 mt-1">
+          <p className="text-[11px] sm:text-xs text-sky-100 mt-1 truncate">
             À l'ordre de : <span className="font-bold text-white">{businessName}</span>
           </p>
         </div>
 
         {/* Content */}
-        <div className="p-6 space-y-4">
+        <div className="p-4 sm:p-6 space-y-3 sm:space-y-4">
           {!paidDone ? (
             <>
               <div className="bg-sky-50/60 rounded-2xl p-4 border border-sky-100 space-y-2 text-xs">

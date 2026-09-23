@@ -218,7 +218,7 @@ export default function App() {
       </header>
 
       {/* Main Content Area */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6 pb-28 md:pb-12">
         {activeTab === 'dashboard' && (
           <Dashboard 
             kpis={data.kpis}
@@ -291,37 +291,46 @@ export default function App() {
         )}
       </main>
 
-      {/* Mobile Bottom Navigation Bar */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 py-2 px-3 flex items-center justify-around z-40 shadow-lg">
+      {/* Mobile Bottom Navigation Bar (Optimized for one-hand thumb use) */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-slate-200/80 py-1.5 px-2 flex items-center justify-around z-40 shadow-xl">
         <button 
           onClick={() => setActiveTab('dashboard')}
-          className={`flex flex-col items-center gap-1 text-[11px] font-bold ${activeTab === 'dashboard' ? 'text-emerald-700' : 'text-slate-400'}`}
+          className={`flex flex-col items-center justify-center py-1 px-2 rounded-xl text-[10px] font-bold transition ${activeTab === 'dashboard' ? 'text-emerald-700 bg-emerald-50' : 'text-slate-400 hover:text-slate-600'}`}
         >
-          <LayoutDashboard className="w-5 h-5" />
-          Accueil
+          <LayoutDashboard className="w-4 h-4 mb-0.5" />
+          <span>Accueil</span>
         </button>
 
         <button 
           onClick={() => setActiveTab('kaye')}
-          className={`flex flex-col items-center gap-1 text-[11px] font-bold ${activeTab === 'kaye' ? 'text-emerald-700' : 'text-slate-400'}`}
+          className={`flex flex-col items-center justify-center py-1 px-2 rounded-xl text-[10px] font-bold transition ${activeTab === 'kaye' ? 'text-emerald-700 bg-emerald-50' : 'text-slate-400 hover:text-slate-600'}`}
         >
-          <BookOpen className="w-5 h-5" />
-          Kaye
+          <BookOpen className="w-4 h-4 mb-0.5" />
+          <span>Kaye</span>
         </button>
 
         <button 
           onClick={() => setActiveTab('voice')}
-          className={`flex flex-col items-center gap-1 text-[11px] font-bold -mt-4 bg-emerald-600 text-white w-12 h-12 rounded-full justify-center shadow-lg shadow-emerald-900/40`}
+          className={`flex flex-col items-center justify-center -mt-5 bg-gradient-to-tr from-emerald-600 to-teal-500 text-white w-12 h-12 rounded-full shadow-lg shadow-emerald-900/40 ring-4 ring-white active:scale-95 transition`}
+          title="Microphone Koom-Koom"
         >
           <Mic className="w-6 h-6" />
         </button>
 
         <button 
           onClick={() => setActiveTab('whatsapp')}
-          className={`flex flex-col items-center gap-1 text-[11px] font-bold ${activeTab === 'whatsapp' ? 'text-emerald-700' : 'text-slate-400'}`}
+          className={`flex flex-col items-center justify-center py-1 px-2 rounded-xl text-[10px] font-bold transition ${activeTab === 'whatsapp' ? 'text-emerald-700 bg-emerald-50' : 'text-slate-400 hover:text-slate-600'}`}
         >
-          <MessageCircle className="w-5 h-5" />
-          WhatsApp
+          <MessageCircle className="w-4 h-4 mb-0.5" />
+          <span>WhatsApp</span>
+        </button>
+
+        <button 
+          onClick={() => setActiveTab('manuel')}
+          className={`flex flex-col items-center justify-center py-1 px-2 rounded-xl text-[10px] font-bold transition ${activeTab === 'manuel' ? 'text-emerald-700 bg-emerald-50' : 'text-slate-400 hover:text-slate-600'}`}
+        >
+          <FileText className="w-4 h-4 mb-0.5" />
+          <span>Manuel</span>
         </button>
       </nav>
 
