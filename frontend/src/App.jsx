@@ -12,7 +12,8 @@ import {
   MessageCircle, 
   RefreshCw,
   Bell,
-  Sparkles
+  Sparkles,
+  FileText
 } from 'lucide-react';
 
 export default function App() {
@@ -180,6 +181,17 @@ export default function App() {
 
           {/* Right Header Actions */}
           <div className="flex items-center gap-2">
+            <a 
+              href="/manuel.html" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold hover:bg-emerald-100 transition shadow-xs"
+              title="Ouvrir le Manuel d'utilisation & Export PDF"
+            >
+              <FileText className="w-3.5 h-3.5 text-emerald-600" />
+              <span className="hidden sm:inline">Manuel PDF</span>
+            </a>
+
             <button 
               onClick={fetchData} 
               title="Rafraîchir les soldes"

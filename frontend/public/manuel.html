@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Manuel d'Utilisation Officiel - Koom-Koom Voice</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap');
+    
+    @page {
+      size: A4;
+      margin: 18mm 15mm 18mm 15mm;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      color: #1e293b;
+      line-height: 1.6;
+      background: #f8fafc;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 40px 50px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+
+    /* Print button toolbar */
+    .toolbar {
+      position: sticky;
+      top: 0;
+      background: #064e3b;
+      color: white;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    }
+
+    .toolbar button {
+      background: #10b981;
+      color: white;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+
+    .toolbar button:hover {
+      background: #059669;
+    }
+
+    @media print {
+      .toolbar { display: none !important; }
+      body { background: white; }
+      .container { padding: 0; box-shadow: none; max-width: 100%; }
+      .page-break { page-break-after: always; }
+    }
+
+    /* Cover Page */
+    .cover {
+      text-align: center;
+      padding: 60px 20px 40px 20px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .logo-badge {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 20px auto;
+      background: linear-gradient(135deg, #059669, #0d9488);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      box-shadow: 0 10px 25px rgba(5,150,105,0.3);
+    }
+
+    .cover h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 0 0 10px 0;
+      letter-spacing: -0.5px;
+    }
+
+    .cover .subtitle {
+      font-size: 16px;
+      color: #059669;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .cover .description {
+      font-size: 14px;
+      color: #64748b;
+      max-width: 550px;
+      margin: 0 auto;
+    }
+
+    .meta-box {
+      margin-top: 30px;
+      padding: 15px;
+      background: #f1f5f9;
+      border-radius: 12px;
+      display: inline-block;
+      text-align: left;
+      font-size: 12px;
+      color: #475569;
+    }
+
+    /* Table of contents */
+    .toc {
+      margin: 40px 0;
+      padding: 24px;
+      background: #f8fafc;
+      border-left: 4px solid #059669;
+      border-radius: 0 12px 12px 0;
+    }
+
+    .toc h2 {
+      margin-top: 0;
+      font-size: 16px;
+      color: #0f172a;
+    }
+
+    .toc ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 13px;
+    }
+
+    .toc li {
+      padding: 6px 0;
+      border-bottom: 1px dashed #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Sections */
+    h2.section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px;
+      color: #0f172a;
+      border-bottom: 2px solid #059669;
+      padding-bottom: 6px;
+      margin-top: 40px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h3 {
+      font-size: 15px;
+      color: #1e293b;
+      margin-top: 20px;
+      margin-bottom: 8px;
+    }
+
+    p, li {
+      font-size: 13px;
+      color: #334155;
+    }
+
+    /* Feature Cards */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin: 15px 0;
+    }
+
+    .card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .card.highlight {
+      background: #ecfdf5;
+      border-color: #a7f3d0;
+    }
+
+    .card-title {
+      font-weight: 700;
+      font-size: 13px;
+      color: #065f46;
+      margin-bottom: 6px;
+    }
+
+    /* Callouts */
+    .callout {
+      padding: 14px 18px;
+      border-radius: 10px;
+      font-size: 12px;
+      margin: 15px 0;
+    }
+
+    .callout-info {
+      background: #eff6ff;
+      border-left: 4px solid #3b82f6;
+      color: #1e40af;
+    }
+
+    .callout-success {
+      background: #f0fdf4;
+      border-left: 4px solid #22c55e;
+      color: #166534;
+    }
+
+    .callout-warning {
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      color: #92400e;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      margin: 15px 0;
+    }
+
+    th, td {
+      border: 1px solid #cbd5e1;
+      padding: 8px 12px;
+      text-align: left;
+    }
+
+    th {
+      background: #f1f5f9;
+      font-weight: 700;
+      color: #334155;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .badge-wave { background: #e0f2fe; color: #0369a1; }
+    .badge-danger { background: #fee2e2; color: #b91c1c; }
+    .badge-success { background: #dcfce7; color: #15803d; }
+
+    .step-box {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 12px;
+      align-items: flex-start;
+    }
+
+    .step-number {
+      background: #059669;
+      color: white;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 12px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .step-text {
+      flex: 1;
+    }
+
+    .footer {
+      margin-top: 50px;
+      padding-top: 20px;
+      border-top: 1px solid #e2e8f0;
+      text-align: center;
+      font-size: 11px;
+      color: #94a3b8;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Action Bar -->
+  <div class="toolbar">
+    <div style="font-weight: 700; font-size: 14px;">
+      🎙️ Manuel d'Utilisation • Koom-Koom Voice
+    </div>
+    <button onclick="window.print()">
+      🖨️ Imprimer ou Enregistrer en PDF
+    </button>
+  </div>
+
+  <div class="container">
+    <!-- Cover -->
+    <div class="cover">
+      <div class="logo-badge">🎙️</div>
+      <h1>KOOM-KOOM VOICE</h1>
+      <div class="subtitle">Le « Kaye » Numérique & Recouvrement Vocal WhatsApp</div>
+      <p class="description">
+        Guide opératoire et manuel pratique d'utilisation à destination des grossistes, demi-grossistes et commerçants des marchés d'Afrique de l'Ouest (Sénégal, Côte d'Ivoire, Mali, etc.).
+      </p>
+
+      <div class="meta-box">
+        <strong>Version :</strong> 1.0.0 (Production)<br>
+        <strong>Déploiement en ligne :</strong> https://komkom.vercel.app<br>
+        <strong>Devise de référence :</strong> Franc CFA (XOF / FCFA)<br>
+        <strong>Moyens intégrés :</strong> Wave Sénégal, WhatsApp Cloud, Orange Money
+      </div>
+    </div>
+
+    <!-- Table of Contents -->
+    <div class="toc">
+      <h2>📋 Sommaire du Manuel</h2>
+      <ul>
+        <li><span>1. Introduction & Pourquoi Koom-Koom Voice ?</span> <span>Page 1</span></li>
+        <li><span>2. Les 4 Piliers Fonctionnels de l'Application</span> <span>Page 2</span></li>
+        <li><span>3. Guide Pratique de la Saisie Vocale IA</span> <span>Page 3</span></li>
+        <li><span>4. Gestion Quotidienne du « Kaye » Numérique</span> <span>Page 4</span></li>
+        <li><span>5. Recouvrement Automatisé par WhatsApp & Liens Wave</span> <span>Page 5</span></li>
+        <li><span>6. Encaissement & Génération de Quittances Officielles</span> <span>Page 6</span></li>
+      </ul>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- Section 1 -->
+    <h2 class="section-title">1. Introduction & Philosophie Métier</h2>
+    <p>
+      Dans les grands pôles commerciaux d'Afrique de l'Ouest (Marchés <strong>Sandaga</strong>, <strong>HLM</strong>, <strong>Tilène</strong> à Dakar, ou <strong>Adjamé</strong> à Abidjan), plus de 70% des volumes de marchandises sont vendus à crédit aux détaillants de quartier.
+    </p>
+
+    <div class="card highlight">
+      <div class="card-title">⚠️ Le problème du carnet papier traditionnel (« Kaye ») :</div>
+      <ul>
+        <li><strong>Pertes de créances :</strong> Pages arrachées, écriture illisible, oublis d'échéances.</li>
+        <li><strong>Friction de saisie :</strong> Les commerçants n'aiment pas taper sur des petits claviers de smartphones au milieu du bruit du marché.</li>
+        <li><strong>Conflits relationnels :</strong> La relance téléphonique directe est souvent mal vécue ou repoussée par gêne sociale.</li>
+        <li><strong>Lenteur des remboursements :</strong> Le débiteur reporte le paiement car il doit se déplacer physiquement avec du liquide.</li>
+      </ul>
+    </div>
+
+    <p>
+      <strong>Koom-Koom Voice résout cette équation</strong> en combinant la <strong>reconnaissance vocale bilingue (Wolof & Français)</strong>, les <strong>relances diplomates sur WhatsApp</strong> et le <strong>paiement instantané sans frais via Wave</strong>.
+    </p>
+
+    <!-- Section 2 -->
+    <h2 class="section-title">2. Les 4 Piliers de l'Application</h2>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">📊 1. Tableau de Bord (Dashboard)</div>
+        <p>Affiche en temps réel la santé financière du grossiste :</p>
+        <ul>
+          <li>Total des créances en cours (FCFA)</li>
+          <li>Montant total recouvré</li>
+          <li>Taux de recouvrement en pourcentage (%)</li>
+          <li>Nombre de dossiers en retard à traiter en priorité</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-title">📖 2. Le « Kaye » Numérique</div>
+        <p>Fiches complètes des clients débiteurs avec solde ouvert, historique d'achats à crédit, échéances et boutons d'actions rapides (Relance WhatsApp 1-Clic, Encaisser, Quittance).</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">🎙️ 3. Saisie Vocale IA (Voice-First)</div>
+        <p>Microphone intelligent qui écoute le commerçant dicter ses ventes ou encaissements et extrait automatiquement le montant, le client et l'échéance.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">💬 4. Simulateur & Relances WhatsApp</div>
+        <p>Générateur de messages de relance respectueux avec insertion automatique d'un lien de paiement direct Wave sans frais.</p>
+      </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- Section 3 -->
+    <h2 class="section-title">3. Guide de la Saisie Vocale IA</h2>
+    <p>
+      Le module <strong>« Saisie Vocale IA »</strong> permet d'enregistrer des opérations sans toucher au clavier.
+    </p>
+
+    <div class="step-box">
+      <div class="step-number">1</div>
+      <div class="step-text">
+        <strong>Cliquez sur le gros bouton Microphone vert</strong> au centre de l'écran.
+      </div>
+    </div>
+
+    <div class="step-box">
+      <div class="step-number">2</div>
+      <div class="step-text">
+        <strong>Parlez distinctement</strong> en Français ou en Wolof (comme vous le feriez avec un apprenti au comptoir).
+      </div>
+    </div>
+
+    <div class="step-box">
+      <div class="step-number">3</div>
+      <div class="step-text">
+        <strong>L'intelligence artificielle analyse la phrase</strong>, extrait les données et prépare l'écriture comptable avec un retour bilingue.
+      </div>
+    </div>
+
+    <div class="step-box">
+      <div class="step-number">4</div>
+      <div class="step-text">
+        Cliquez sur <strong>« Valider & Inscrire dans le Kaye »</strong> pour valider l'opération.
+      </div>
+    </div>
+
+    <h3>Exemples de phrases reconnues par le moteur NLU :</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Phrase Dictée</th>
+          <th>Intention Détectée</th>
+          <th>Données Extraites</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><em>« Mamadou Sow a pris 3 sacs de riz pour 75000 FCFA payable vendredi prochain »</em></td>
+          <td><span class="badge badge-wave">NOUVELLE CRÉANCE</span></td>
+          <td>Client: <strong>Mamadou Sow</strong><br>Montant: <strong>75 000 FCFA</strong><br>Échéance: <strong>Vendredi</strong></td>
+        </tr>
+        <tr>
+          <td><em>« Fatou Diop doit 175 000 FCFA pour du bazin riche getzner »</em></td>
+          <td><span class="badge badge-wave">NOUVELLE CRÉANCE</span></td>
+          <td>Client: <strong>Fatou Diop</strong><br>Montant: <strong>175 000 FCFA</strong><br>Détail: <strong>Bazin riche</strong></td>
+        </tr>
+        <tr>
+          <td><em>« Alioune feyna 30 000 FCFA ci Wave »</em> (Wolof)</td>
+          <td><span class="badge badge-success">RÈGLEMENT ENCAISSÉ</span></td>
+          <td>Client: <strong>Alioune</strong><br>Montant: <strong>30 000 FCFA</strong><br>Moyen: <strong>WAVE</strong></td>
+        </tr>
+        <tr>
+          <td><em>« Enregistre un paiement de 50 000 FCFA pour Mamadou Sow »</em></td>
+          <td><span class="badge badge-success">RÈGLEMENT ENCAISSÉ</span></td>
+          <td>Client: <strong>Mamadou Sow</strong><br>Déduction: <strong>-50 000 FCFA</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-info">
+      💡 <strong>Astuce vocale :</strong> Vous pouvez également cliquer sur les boutons d'exemples pré-configurés en bas du micro pour faire une démonstration immédiate.
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- Section 4 -->
+    <h2 class="section-title">4. Gestion Quotidienne du « Kaye » Numérique</h2>
+    <p>
+      L'onglet <strong>« Le Kaye »</strong> rassemble tous les dossiers débiteurs avec code couleur de statut :
+    </p>
+
+    <ul>
+      <li><strong style="color: #15803d;">EN COURS (Vert) :</strong> La créance est active et la date limite n'est pas encore atteinte.</li>
+      <li><strong style="color: #b91c1c;">RETARD (Rouge) :</strong> L'échéance fixée est dépassée. Ce dossier nécessite une relance prioritaire.</li>
+      <li><strong style="color: #475569;">RÉGLÉ (Gris) :</strong> Le client a soldé l'intégralité de sa dette.</li>
+    </ul>
+
+    <h3>Actions Disponibles sur chaque fiche client :</h3>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">💬 Bouton « Relance WhatsApp »</div>
+        <p>Génère instantanément un message personnalisé pré-rédigé incluant le lien de règlement Wave et ouvre le simulateur de messagerie.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">💵 Bouton « Encaisser »</div>
+        <p>Permet d'enregistrer un versement partiel ou total avec choix du moyen (Wave, Orange Money ou Espèces en main propre).</p>
+      </div>
+    </div>
+
+    <!-- Section 5 -->
+    <h2 class="section-title">5. Recouvrement Automatisé par WhatsApp & Liens Wave</h2>
+    <p>
+      Pour préserver les relations commerciales tout en maximisant la vitesse de recouvrement, Koom-Koom Voice propose 3 tonalités de messages conformes aux usages de politesse :
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Tonalité</th>
+          <th>Usage Recommandé</th>
+          <th>Extrait du Message</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>🤝 Courtois</strong></td>
+          <td>Quelques jours avant l'échéance</td>
+          <td><em>« Salam [Client], rappel amical concernant votre créance de [Montant] FCFA chez Éts Ndiaye Sandaga. Lien direct Wave : [Lien]... Yalla na Yalla barkeel ligéey bi ! »</em></td>
+        </tr>
+        <tr>
+          <td><strong>⚠️ Retard</strong></td>
+          <td>Après dépassement de date</td>
+          <td><em>« Salam [Client], nous constatons que l'échéance est dépassée. Merci d'effectuer le règlement via Wave ou me contacter pour un échelonnement. »</em></td>
+        </tr>
+        <tr>
+          <td><strong>🇸🇳 Wolof</strong></td>
+          <td>Commerçants préférant le vernaculaire</td>
+          <td><em>« Salam [Client], nanga def ? Dañu lay rappelé bor bi ci kaye bi : [Montant] FCFA. Mën nga fey leegi ci Wave ci lien bii... »</em></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-success">
+      🌊 <strong>Le Lien Direct Wave :</strong> Lorsque le client clique sur le lien WhatsApp, son application Wave s'ouvre avec le montant et le numéro du commerçant déjà pré-remplis. Aucun risque d'erreur de saisie de numéro !
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- Section 6 -->
+    <h2 class="section-title">6. Encaissement & Quittances Officielles</h2>
+    <p>
+      Dès qu'un paiement est validé (soit par le client via le lien Wave, soit manuellement au comptoir), Koom-Koom Voice génère une <strong>Quittance de Paiement Certifiée</strong>.
+    </p>
+
+    <div class="card highlight">
+      <div class="card-title">Éléments de la Quittance Numérique :</div>
+      <ul>
+        <li><strong>Identifiant unique de transaction :</strong> Ex: <code>KKV-REC-2026-0801</code></li>
+        <li><strong>Informations du commerçant :</strong> Nom de l'établissement, allée du marché, téléphone.</li>
+        <li><strong>Détails du débiteur :</strong> Nom et contact.</li>
+        <li><strong>Montant exact encaissé en FCFA</strong> et moyen utilisé (Wave / Espèces).</li>
+        <li><strong>Tampon de conformité :</strong> Preuve légale de décharge et mise à jour du carnet.</li>
+        <li><strong>Boutons 1-Clic :</strong> « Imprimer » ou « Partager sur WhatsApp » au client pour lui notifier la quittance.</li>
+      </ul>
+    </div>
+
+    <div class="callout callout-warning">
+      🔒 <strong>Sécurité & Valeur Juridique :</strong> La quittance numérique protège à la fois le client (qui a une preuve écrite de son versement) et le commerçant (qui suit sa trésorerie sans contestation possible).
+    </div>
+
+    <div class="footer">
+      <strong>Koom-Koom Voice • Document Confidentiel & Guide Opérationnel</strong><br>
+      Conçu pour l'écosystème commercial de l'UEMOA (Dakar - Abidjan - Bamako)<br>
+      Accès Application Web : <a href="https://komkom.vercel.app">https://komkom.vercel.app</a>
+    </div>
+  </div>
+
+</body>
+</html>
