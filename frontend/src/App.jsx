@@ -5,6 +5,7 @@ import VoiceRecorder from './components/VoiceRecorder';
 import WhatsAppSim from './components/WhatsAppSim';
 import WaveCheckout from './components/WaveCheckout';
 import ReceiptModal from './components/ReceiptModal';
+import Manuel from './components/Manuel';
 import { 
   LayoutDashboard, 
   BookOpen, 
@@ -177,20 +178,28 @@ export default function App() {
               <MessageCircle className="w-4 h-4 text-emerald-600" />
               Simulateur WhatsApp
             </button>
+
+            <button 
+              onClick={() => setActiveTab('manuel')}
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition ${
+                activeTab === 'manuel' ? 'bg-white text-emerald-800 shadow-sm' : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <FileText className="w-4 h-4 text-emerald-600" />
+              Manuel PDF
+            </button>
           </nav>
 
           {/* Right Header Actions */}
           <div className="flex items-center gap-2">
-            <a 
-              href="/manuel.html" 
-              target="_blank" 
-              rel="noopener noreferrer"
+            <button 
+              onClick={() => setActiveTab('manuel')}
               className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold hover:bg-emerald-100 transition shadow-xs"
-              title="Ouvrir le Manuel d'utilisation & Export PDF"
+              title="Consulter le Manuel d'utilisation & Export PDF"
             >
               <FileText className="w-3.5 h-3.5 text-emerald-600" />
               <span className="hidden sm:inline">Manuel PDF</span>
-            </a>
+            </button>
 
             <button 
               onClick={fetchData} 
@@ -231,7 +240,6 @@ export default function App() {
             onRecordPayment={handleRecordPayment}
             onOpenWhatsApp={handleOpenWhatsAppFromKaye}
             onViewReceipt={(cred) => {
-              // Find matching transaction
               const matchTxn = data.recentTransactions?.find(t => t.creditId === cred.id);
               if (matchTxn) {
                 setViewingReceipt({
@@ -276,6 +284,10 @@ export default function App() {
             merchant={data.merchant}
             onOpenWaveCheckout={(cred) => setWaveCheckoutCredit(cred || credits[0])}
           />
+        )}
+
+        {activeTab === 'manuel' && (
+          <Manuel />
         )}
       </main>
 
