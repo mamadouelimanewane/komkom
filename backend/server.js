@@ -394,8 +394,6 @@ app.get('/api/receipts/:txnId', (req, res) => {
   res.json(receipt);
 });
 
-});
-
 if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
   app.listen(PORT, () => {
     console.log(`[KOOM-KOOM VOICE] Backend API démarré sur http://localhost:${PORT}`);
