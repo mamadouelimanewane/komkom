@@ -6,15 +6,17 @@ import WhatsAppSim from './components/WhatsAppSim';
 import WaveCheckout from './components/WaveCheckout';
 import ReceiptModal from './components/ReceiptModal';
 import Manuel from './components/Manuel';
+import AdminBackoffice from './components/AdminBackoffice';
 import { 
   LayoutDashboard, 
   BookOpen, 
   Mic, 
   MessageCircle, 
-  RefreshCw,
-  Bell,
-  Sparkles,
-  FileText
+  RefreshCw, 
+  Bell, 
+  Sparkles, 
+  FileText,
+  ShieldCheck
 } from 'lucide-react';
 
 export default function App() {
@@ -188,17 +190,29 @@ export default function App() {
               <FileText className="w-4 h-4 text-emerald-600" />
               Manuel PDF
             </button>
+
+            <button 
+              onClick={() => setActiveTab('admin')}
+              className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition ${
+                activeTab === 'admin' ? 'bg-slate-900 text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <ShieldCheck className="w-4 h-4 text-sky-400" />
+              Admin
+            </button>
           </nav>
 
           {/* Right Header Actions */}
           <div className="flex items-center gap-2">
             <button 
-              onClick={() => setActiveTab('manuel')}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold hover:bg-emerald-100 transition shadow-xs"
-              title="Consulter le Manuel d'utilisation & Export PDF"
+              onClick={() => setActiveTab(activeTab === 'admin' ? 'dashboard' : 'admin')}
+              className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold transition shadow-xs ${
+                activeTab === 'admin' ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+              }`}
+              title="Accéder au Backoffice Administrateur"
             >
-              <FileText className="w-3.5 h-3.5 text-emerald-600" />
-              <span className="hidden sm:inline">Manuel PDF</span>
+              <ShieldCheck className="w-3.5 h-3.5 text-sky-500" />
+              <span className="hidden sm:inline">Backoffice Admin</span>
             </button>
 
             <button 
@@ -288,6 +302,10 @@ export default function App() {
 
         {activeTab === 'manuel' && (
           <Manuel />
+        )}
+
+        {activeTab === 'admin' && (
+          <AdminBackoffice />
         )}
       </main>
 

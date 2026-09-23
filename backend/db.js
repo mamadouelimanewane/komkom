@@ -17,6 +17,98 @@ const DEFAULT_DATA = {
     waveNumber: "+221774502819",
     currency: "FCFA"
   },
+  merchants: [
+    {
+      id: "m_1",
+      name: "El Hadj Cheikh Ndiaye",
+      businessName: "Établissements Ndiaye & Frères",
+      market: "Marché Sandaga, Hall Central, Dakar",
+      sector: "Riz, Sucre, Huile, Denrées en gros",
+      phone: "+221774502819",
+      waveNumber: "+221774502819",
+      status: "active",
+      joinedAt: "2026-06-15",
+      monthlyVolume: 12500000,
+      recoveryRate: 88
+    },
+    {
+      id: "m_2",
+      name: "Modou Kara Fall",
+      businessName: "Fall Textiles & Bazin Prestige",
+      market: "Marché HLM 5, Allée des Tissus, Dakar",
+      sector: "Bazin riche, Getzner, Voile suisse",
+      phone: "+221783456789",
+      waveNumber: "+221783456789",
+      status: "active",
+      joinedAt: "2026-07-02",
+      monthlyVolume: 8900000,
+      recoveryRate: 92
+    },
+    {
+      id: "m_3",
+      name: "Ibrahima Cissé",
+      businessName: "Quincaillerie Cissé & Fils",
+      market: "Marché Tilène, Médina, Dakar",
+      sector: "Matériaux de construction & Électricité",
+      phone: "+221768899001",
+      waveNumber: "+221768899001",
+      status: "active",
+      joinedAt: "2026-08-10",
+      monthlyVolume: 6400000,
+      recoveryRate: 79
+    },
+    {
+      id: "m_4",
+      name: "Fatoumata Bamba",
+      businessName: "Bamba Cosmétiques Import",
+      market: "Grand Marché d'Adjamé, Abidjan (Côte d'Ivoire)",
+      sector: "Parfumerie, Cosmétique & Soins",
+      phone: "+225070809101",
+      waveNumber: "+225070809101",
+      status: "pending",
+      joinedAt: "2026-09-18",
+      monthlyVolume: 4200000,
+      recoveryRate: 85
+    }
+  ],
+  platformSettings: {
+    platformName: "Koom-Koom Voice Network",
+    commissionRate: 0.5, // 0.5% sur les montants recouvrés
+    currency: "FCFA",
+    waveApiMode: "live",
+    waveMerchantId: "WAVE-MERCHANT-SN-784920",
+    waveApiKey: "wave_live_sk_4982a7f01c890123",
+    whatsappPhoneId: "109827364519283",
+    whatsappToken: "EAABx749102847291847190",
+    nluConfidenceThreshold: 0.80,
+    smsFallbackEnabled: true
+  },
+  auditLogs: [
+    {
+      id: "log_1",
+      timestamp: "2026-09-23T11:45:00Z",
+      type: "PAYMENT_SETTLED",
+      actor: "Mamadou Sow (Débiteur)",
+      details: "Paiement Wave de 75 000 FCFA validé pour Éts Ndiaye Sandaga. Quittance générée.",
+      ip: "196.207.240.12 (Sonatel Dakar)"
+    },
+    {
+      id: "log_2",
+      timestamp: "2026-09-23T10:15:00Z",
+      type: "WHATSAPP_REMINDER",
+      actor: "Système Koom-Koom Bot",
+      details: "Relance WhatsApp envoyée à Fatou Diop (+221789876543) avec lien direct Wave.",
+      ip: "104.28.14.99 (Meta Webhook)"
+    },
+    {
+      id: "log_3",
+      timestamp: "2026-09-23T08:30:00Z",
+      type: "VOICE_TRANSACTION",
+      actor: "El Hadj Cheikh Ndiaye",
+      details: "Créance vocale de 90 000 FCFA inscrite au Kaye (Audio transcrit avec succès).",
+      ip: "154.124.71.5 (Orange Sénégal)"
+    }
+  ],
   customers: [
     {
       id: "cust_1",
@@ -27,6 +119,7 @@ const DEFAULT_DATA = {
       riskLevel: "faible",
       totalDebt: 90000,
       totalRepaid: 150000,
+      creditScore: 82,
       createdAt: "2026-08-10"
     },
     {
@@ -38,6 +131,7 @@ const DEFAULT_DATA = {
       riskLevel: "moyen",
       totalDebt: 175000,
       totalRepaid: 80000,
+      creditScore: 58,
       createdAt: "2026-08-15"
     },
     {
@@ -49,6 +143,7 @@ const DEFAULT_DATA = {
       riskLevel: "eleve",
       totalDebt: 250000,
       totalRepaid: 50000,
+      creditScore: 35,
       createdAt: "2026-07-20"
     },
     {
@@ -60,6 +155,7 @@ const DEFAULT_DATA = {
       riskLevel: "faible",
       totalDebt: 0,
       totalRepaid: 310000,
+      creditScore: 94,
       createdAt: "2026-06-01"
     }
   ],
@@ -152,7 +248,26 @@ export function getDb() {
       return DEFAULT_DATA;
     }
     const raw = fs.readFileSync(DATA_FILE, 'utf-8');
-    return JSON.parse(raw);
+    const data = JSON.parse(raw);
+
+    // Auto migration if keys are missing
+    let modified = false;
+    if (!data.merchants || !Array.isArray(data.merchants)) {
+      data.merchants = DEFAULT_DATA.merchants;
+      modified = true;
+    }
+    if (!data.platformSettings) {
+      data.platformSettings = DEFAULT_DATA.platformSettings;
+      modified = true;
+    }
+    if (!data.auditLogs) {
+      data.auditLogs = DEFAULT_DATA.auditLogs;
+      modified = true;
+    }
+    if (modified) {
+      fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2), 'utf-8');
+    }
+    return data;
   } catch (err) {
     console.error("Erreur lecture DB, fallback sur DEFAULT_DATA:", err);
     return DEFAULT_DATA;

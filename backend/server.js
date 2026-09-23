@@ -394,6 +394,93 @@ app.get('/api/receipts/:txnId', (req, res) => {
   res.json(receipt);
 });
 
+// 10. BACKOFFICE ADMINISTRATION
+app.get('/api/admin/overview', (req, res) => {
+  const db = getDb();
+  const totalVolume = (db.merchants || []).reduce((sum, m) => sum + (m.monthlyVolume || 0), 0);
+  const totalRecovered = (db.transactions || []).reduce((sum, t) => sum + (t.amount || 0), 0);
+  const commissionRate = db.platformSettings?.commissionRate || 0.5;
+  const platformRevenue = Math.round(totalRecovered * (commissionRate / 100));
+
+  res.json({
+    platformSettings: db.platformSettings,
+    stats: {
+      totalMerchants: (db.merchants || []).length,
+      activeMerchants: (db.merchants || []).filter(m => m.status === 'active').length,
+      totalVolume,
+      totalRecovered,
+      platformRevenue,
+      commissionRate,
+      totalCustomers: (db.customers || []).length,
+      totalCredits: (db.credits || []).length,
+      highRiskCustomers: (db.customers || []).filter(c => c.riskLevel === 'eleve').length
+    },
+    merchants: db.merchants || [],
+    recentLogs: db.auditLogs || []
+  });
+});
+
+app.get('/api/admin/merchants', (req, res) => {
+  const db = getDb();
+  res.json(db.merchants || []);
+});
+
+app.post('/api/admin/merchants', (req, res) => {
+  const db = getDb();
+  const { name, businessName, market, sector, phone, waveNumber } = req.body;
+  if (!name || !businessName || !phone) {
+    return res.status(400).json({ error: "Champs obligatoires manquants" });
+  }
+
+  const newM = {
+    id: `m_${Date.now()}`,
+    name: name.trim(),
+    businessName: businessName.trim(),
+    market: market || "Marché Sandaga, Dakar",
+    sector: sector || "Commerce général",
+    phone: phone.trim(),
+    waveNumber: waveNumber || phone.trim(),
+    status: "active",
+    joinedAt: new Date().toISOString().split('T')[0],
+    monthlyVolume: 0,
+    recoveryRate: 100
+  };
+
+  if (!db.merchants) db.merchants = [];
+  db.merchants.push(newM);
+  saveDb(db);
+  res.status(201).json(newM);
+});
+
+app.put('/api/admin/merchants/:id/toggle', (req, res) => {
+  const db = getDb();
+  const m = (db.merchants || []).find(item => item.id === req.params.id);
+  if (!m) return res.status(404).json({ error: "Marchand introuvable" });
+  m.status = m.status === 'active' ? 'suspended' : 'active';
+  saveDb(db);
+  res.json(m);
+});
+
+app.get('/api/admin/settings', (req, res) => {
+  const db = getDb();
+  res.json(db.platformSettings || {});
+});
+
+app.post('/api/admin/settings', (req, res) => {
+  const db = getDb();
+  db.platformSettings = {
+    ...db.platformSettings,
+    ...req.body
+  };
+  saveDb(db);
+  res.json({ success: true, settings: db.platformSettings });
+});
+
+app.get('/api/admin/logs', (req, res) => {
+  const db = getDb();
+  res.json(db.auditLogs || []);
+});
+
 if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
   app.listen(PORT, () => {
     console.log(`[KOOM-KOOM VOICE] Backend API démarré sur http://localhost:${PORT}`);
