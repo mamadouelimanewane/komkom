@@ -394,7 +394,13 @@ app.get('/api/receipts/:txnId', (req, res) => {
   res.json(receipt);
 });
 
-app.listen(PORT, () => {
-  console.log(`[KOOM-KOOM VOICE] Backend API démarré sur http://localhost:${PORT}`);
-  console.log(`Mode Marchés Sénégal & UEMOA actif (Wave & WhatsApp Engine)`);
 });
+
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`[KOOM-KOOM VOICE] Backend API démarré sur http://localhost:${PORT}`);
+    console.log(`Mode Marchés Sénégal & UEMOA actif (Wave & WhatsApp Engine)`);
+  });
+}
+
+export default app;
